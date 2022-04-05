@@ -112,7 +112,9 @@ public class Main {
 
     public static void about() {
         // TODO insert information about authors
-        System.out.println("000RDB000 Jānis Programmētājs");
+        System.out.println("211RDC037 Sindija Bārzdina");
+        System.out.println("111RDB111 Ilze Programmētāja");
+        System.out.println("111RDB111 Ilze Programmētāja");
         System.out.println("111RDB111 Ilze Programmētāja");
     }
 }
