@@ -1,6 +1,6 @@
 // 000RDB000 Jānis Programmētājs
 // 111RDB111 Ilze Programmētāja
-
+//asdf
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
