@@ -17,7 +17,7 @@ public class Main {
         loop: while (true) {
 
             choiseStr = sc.next();
-//eeresczsczsczdzszk
+//eeresczsczsczdzszkk
             switch (choiseStr) {
                 case "comp":
                     System.out.print("source file name: ");
