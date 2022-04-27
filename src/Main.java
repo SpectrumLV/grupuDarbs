@@ -18,7 +18,7 @@ public class Main {
 
             choiseStr = sc.next();
 //komentars
-// halo
+//parbaude
             switch (choiseStr) {
                 case "comp":
                     System.out.print("source file name: ");
