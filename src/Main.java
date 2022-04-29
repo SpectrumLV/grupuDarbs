@@ -9,7 +9,6 @@ import java.util.Scanner;
 public class Main {
 
 
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String choiseStr;
@@ -25,14 +24,14 @@ public class Main {
                     sourceFile = sc.next();
                     System.out.print("archive name: ");
                     resultFile = sc.next();
-                    LZWCompress(sourceFile, resultFile);
+                    comp(sourceFile, resultFile);
                     break;
                 case "decomp":
                     System.out.print("archive name: ");
                     sourceFile = sc.next();
                     System.out.print("file name: ");
                     resultFile = sc.next();
-                    LZWDecompress(sourceFile, resultFile);
+                    decomp(sourceFile, resultFile);
                     break;
                 case "size":
                     System.out.print("file name: ");
@@ -57,16 +56,12 @@ public class Main {
         sc.close();
     }
 
-    public static void LZWCompress(String sourceFile, String resultFile) {
+    public static void comp(String sourceFile, String resultFile) {
         // TODO: implement this method
     }
 
-    public static void LZWDecompress(String sourceFile, String resultFile) {
+    public static void decomp(String sourceFile, String resultFile) {
         // TODO: implement this method
-    }
-
-    public void CreateFile(String filename){
-
     }
 
     public static void size(String sourceFile) {
@@ -117,9 +112,7 @@ public class Main {
 
     public static void about() {
         // TODO insert information about authors
-        System.out.println("Līva Janevica 211RDC033");
-        System.out.println("Sindija Bārzdiņa 211RDC037");
-        System.out.println("Dmitrijs Sizovs 211RDC002");
-        System.out.println("Reinis Brūvelis 211RDC028");
+        System.out.println("000RDB000 Jānis Programmētājs");
+        System.out.println("111RDB111 Ilze Programmētāja");
     }
 }
