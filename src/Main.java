@@ -158,9 +158,7 @@ public class Main {
 
     }
 
-//    public static void LZWcomp(String sourceFile, String resultFile) {
-//        // TODO: implement this method
-//    }
+
 
     public static void LZWdecomp(String sourceFile, String resultFile) {
         // TODO: implement this method
