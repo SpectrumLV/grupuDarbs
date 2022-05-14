@@ -1,90 +1,49 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
 
 public class lzw {
-    public lzw(){}
 
-    public String lzw_compress(String input){
-        HashMap<String,Integer> dictionary = new LinkedHashMap<>();
-        String[] data = (input + "").split("");
-        String out = "";
-        ArrayList<String> temp_out = new ArrayList<>();
-        String currentChar;
-        String phrase = data[0];
-        int code = 256;
-        for(int i=1; i<data.length;i++){
-            currentChar = data[i];
-            if(dictionary.get(phrase+currentChar) != null){
-                phrase += currentChar;
-            }
-            else{
-                if(phrase.length() > 1){
-                    temp_out.add(Character.toString((char)dictionary.get(phrase).intValue()));
+    public static void main(String[] args) throws Exception {
+
+        Scanner keyboard = new Scanner(System.in);
+        String str = "";
+        String inputFile, outputFile, sym;
+        int i, sy;
+        int dictionarySize = 256;
+
+        System.out.println("Enter .txt input file name: ");
+        inputFile = keyboard.nextLine();
+
+        outputFile = inputFile + ".lzw";
+
+        // Create dictionary with ASCII characters(Key) and their indices(Value)
+        Map<String, Integer> dictionary = new HashMap<String, Integer>();
+        OutputStreamWriter writer = new OutputStreamWriter(
+                new FileOutputStream(outputFile), "UTF-16BE");
+
+        for (i = 0; i < 256; i++) {
+            dictionary.put(("" + (char) i), i);
+        }
+
+        // Read contents of input file
+        File input = new File(inputFile);
+        FileInputStream fis = new FileInputStream(input);
+        while ((sy = fis.read()) != -1) {
+            char ch = (char) (sy);
+            sym = String.valueOf(ch);
+            if (dictionary.containsKey(str + sym)) {
+                str = str + sym;
+            } else {
+                writer.write(dictionary.get(str));
+                if (dictionary.size() < dictionarySize) {
+                    dictionary.put(str + sym, dictionary.size());
                 }
-                else{
-                    temp_out.add(Character.toString((char)Character.codePointAt(phrase,0)));
-                }
-
-                dictionary.put(phrase+currentChar,code);
-                code++;
-                phrase = currentChar;
+                str = sym;
             }
         }
-
-        if(phrase.length() > 1){
-            temp_out.add(Character.toString((char)dictionary.get(phrase).intValue()));
-        }
-        else{
-            temp_out.add(Character.toString((char)Character.codePointAt(phrase,0)));
-        }
-
-        for(String outchar:temp_out){
-            out+=outchar;
-        }
-        return out;
-    }
-
-    public String lzw_extract(String input){
-        HashMap<Integer,String> dictionary = new LinkedHashMap<>();
-        String[] data = (input + "").split("");
-        String currentChar = data[0];
-        String oldPhrase = currentChar;
-        String out = currentChar;
-        int code = 256;
-        String phrase="";
-        for(int i=1;i<data.length;i++){
-            int currCode = Character.codePointAt(data[i],0);
-            if(currCode < 256){
-                phrase = data[i];
-            }
-            else{
-                if(dictionary.get(currCode) != null){
-                    phrase = dictionary.get(currCode);
-                }
-                else{
-                    phrase = oldPhrase + currentChar;
-                }
-            }
-            out+=phrase;
-            currentChar = phrase.substring(0,1);
-            dictionary.put(code,oldPhrase+currentChar);
-            code++;
-            oldPhrase = phrase;
-        }
-        return out;
-    }
-    public static void main(String[] args) throws IOException {
-        Scanner scan = new Scanner(System.in);
-
-        System.out.println("input path");
-        String info = scan.next();
-        lzw comp = new lzw();
-        comp.lzw_compress(info);
-        comp.lzw_extract(info);
-        System.out.println("compressed");
-
+        writer.write(dictionary.get(str));
+        writer.close();
+        fis.close();
     }
 }
